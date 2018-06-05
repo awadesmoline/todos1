@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Todo.associate = function(models) {
     // associations can be defined here
+    Todo.hasMany(models.TodoItem, {
+      foreignKey: 'todoId',
+      as: 'todoItems',
+    })
   };
   return Todo;
 };

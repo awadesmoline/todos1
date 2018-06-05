@@ -1,11 +1,21 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var TodoItem = sequelize.define('TodoItem', {
-    content: DataTypes.STRING,
-    complete: DataTypes.BOOLEAN
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    complete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
   }, {});
   TodoItem.associate = function(models) {
     // associations can be defined here
+    TodoItem.belongsTo(models.Todo, {
+      foreignKey: 'todoId',
+      onDelete: 'CASCADE',
+    })
   };
   return TodoItem;
 };
