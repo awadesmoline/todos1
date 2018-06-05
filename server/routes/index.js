@@ -14,4 +14,12 @@ module.exports = (app) => {
   app.get('/api/todos/:todoId', todosController.retrieve);
   app.put('/api/todos/:todoId', todosController.update);
   app.delete('/api/todos/:todoId', todosController.destroy);
+  app.put('/api/todos/:todoId/todoItems/:todoItemId', todoItemsController.update);
+  app.delete('/api/todos/:todoId/todoItems/:todoItemId', todoItemsController.destroy);
+
+  // For any other request method on todo items, we're going to return "Method Not Allowed"
+  app.all('/api/todos/:todoId/todoItems', (req, res) =>
+    res.status(405).send({
+      message: 'Method Not Allowed',
+    }));
 }
