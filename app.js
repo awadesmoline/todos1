@@ -2,6 +2,10 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const routes = require('./server/routes');
+const dotenv = require('dotenv');
+
+// Load dotenv
+dotenv.load();
 
 // Set up the express app
 const app = express();

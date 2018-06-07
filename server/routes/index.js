@@ -1,5 +1,6 @@
 var todosController = require('../controllers').todos
 var todoItemsController = require('../controllers').todoItems
+var userController = require('../controllers/user');
 
 module.exports = (app) => {
   app.get('/api', (req, res) => {
@@ -7,6 +8,8 @@ module.exports = (app) => {
       message: 'Welcome to the Todos API!'
     })
   })
+
+  app.post('/api/sign_up', userController.sign_up)
 
   app.post('/api/todos', todosController.create);
   app.get('/api/todos', todosController.list);
