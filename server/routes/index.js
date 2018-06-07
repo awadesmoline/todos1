@@ -10,6 +10,7 @@ module.exports = (app) => {
   })
 
   app.post('/api/sign_up', userController.sign_up)
+  app.post('/api/sign_in', userController.sign_in)
 
   app.post('/api/todos', todosController.create);
   app.get('/api/todos', todosController.list);
