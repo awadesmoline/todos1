@@ -49,8 +49,12 @@ module.exports = {
           message: 'Todo Not Found',
         });
       }
+      if (todo.title !== req.body.title && todo.status === 'done') {
+        return res.status(400).send({ message: 'Can only edit todo title when todo is not done' })
+      }
       return todo.update({
-        title: req.body.title || todo.title
+        title: req.body.title || todo.title,
+        status: req.body.status.toLowerCase() || todo.status
       }).then(todo => res.status(200).send(todo))
       .catch(error => res.status(400).send(error));
     }).catch(error => res.status(400).send(error));
