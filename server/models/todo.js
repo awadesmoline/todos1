@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    status: {
+      type: DataTypes.STRING,
+      isIn: [['in progress', 'done', 'not started']],
     }
   }, {});
   Todo.associate = function(models) {

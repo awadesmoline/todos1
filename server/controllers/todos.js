@@ -61,6 +61,10 @@ module.exports = {
         return res.status(400).send({
           message: 'Todo Not Found',
         });
+      } else if (todo.status !== 'done') {
+        return res.status(400).send({
+          message: 'Todo is not done. You can only delete todos that are done'
+        })
       }
       return Todo.destroy()
         .then(() => res.status(200).send({ message: 'Todo deleted successfully.' }))
