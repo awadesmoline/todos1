@@ -18,7 +18,7 @@ const verifyToken = (req, res, next) => {
 };
 
 const validateStatus = (req, res, next) => {
-  const status = req.body.status.toLowerCase();
+  const status = req.body.status.toLowerCase() || req.params.status.toLowerCase();
   const statusOptions = ['in progress', 'done', 'not started'];
   if (!statusOptions.includes(status)) {
     return res.status(400).send({ message: `Status must be one of ${statusOptions[0]}, ${statusOptions[1]}, or ${statusOptions[1]}`})
@@ -41,6 +41,7 @@ module.exports = (app) => {
   app.post('/api/todos/:todoId/todoItems', verifyToken, todoItemsController.create);
   app.get('/api/todos/:todoId', todosController.retrieve);
   app.put('/api/todos/:todoId', verifyToken, validateStatus, todosController.update);
+  app.get('/api/todos/status/:status', todosController.listByStatus);
   app.delete('/api/todos/:todoId', verifyToken, todosController.destroy);
   app.put('/api/todos/:todoId/todoItems/:todoItemId', verifyToken, todoItemsController.update);
   app.delete('/api/todos/:todoId/todoItems/:todoItemId', verifyToken, todoItemsController.destroy);

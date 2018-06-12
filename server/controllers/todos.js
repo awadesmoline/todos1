@@ -21,6 +21,20 @@ module.exports = {
     .catch(error => res.status(400).send(error))
   },
 
+  listByStatus(req, res) {
+    console.log('Status==========', req.params.status.toLowerCase());
+    return Todo.findAll({
+      where: {
+        status: req.params.status.toLowerCase()
+      },
+      include: [{
+        model: TodoItem,
+        as: 'todoItems'
+      }]
+    }).then(todos => res.status(200).send(todos))
+    .catch(error => res.status(400).send(error))
+  },
+
   retrieve(req, res) {
     return Todo.findById(req.params.todoId, {
       include: [{
