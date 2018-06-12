@@ -22,7 +22,6 @@ module.exports = {
   },
 
   listByStatus(req, res) {
-    console.log('Status==========', req.params.status.toLowerCase());
     return Todo.findAll({
       where: {
         status: req.params.status.toLowerCase()
