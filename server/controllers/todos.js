@@ -3,8 +3,10 @@ var TodoItem = require('../models').TodoItem;
 
 module.exports = {
   create(req, res) {
+    const status = req.body.status.toLowerCase()
     return Todo.create({
-      title: req.body.title
+      title: req.body.title,
+      status,
     }).then(todo => res.status(201).send(todo)) // 201 for post request, 200 for get requests
     .catch(error => res.status(400).send(error))
   },
@@ -61,12 +63,13 @@ module.exports = {
         return res.status(400).send({
           message: 'Todo Not Found',
         });
-      } else if (todo.status !== 'done') {
+      }
+      if (todo.status !== 'done') {
         return res.status(400).send({
           message: 'Todo is not done. You can only delete todos that are done'
         })
       }
-      return Todo.destroy()
+      return todo.destroy()
         .then(() => res.status(200).send({ message: 'Todo deleted successfully.' }))
         .catch(error => res.status(400).send(error))
     }).catch(error => res.status(400).send(error));
