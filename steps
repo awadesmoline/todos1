@@ -1,0 +1,13 @@
+-- Modify the todo model to add status field
+-- modify the delete functionality to only delete tasks that are done
+-- modify the update to update status
+-- add route to get todo items by status
+
+
+Design and Build a simple CRUD API for  todos.
+ Each task has an id, a title and status.
+ There are 3 values for status [In progress, done, not started]).
+ I can only delete tasks that are done.
+ I can update the status of a task 
+I cannot edit the name of a task that is "done".
+ I should be able to view tasks by Id, and by status

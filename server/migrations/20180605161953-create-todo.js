@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      status: {
+        type: Sequelize.STRING,
+        isIn: [['in progress', 'done', 'not started']],
+      },
       title: {
         type: Sequelize.STRING,
         allowNull: false,
